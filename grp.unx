@@ -1,26 +1,55 @@
+#!/bin/bash
 
 echo "***************************************************"
-echo "* 						*"
-echo "*  PROGRAMA GREP GLOBAL                    				*"
-echo "* 						*"
+echo "*                                                 *"
+echo "*  PROGRAMA GREP GLOBAL                           *"
+echo "*                                                 *"
 echo "***************************************************"
 
+# Lectura de la variable needle desde la consola
+#read -p "Ingrese la palabra a buscar: " needle
 
-#BCOB='/software/sgc/gcinte/fuentes/batch/cobros/src'
-#*****************************************************
-#
-#*****************************************************
-for DIRECTORIO in `cat salida_aliases.tmp` 
+value='AP063001'
+
+echo "Ingresa el tag a buscar: "
+read input?"Por defecto: [${value}] "
+
+[[ "${input}" = '' ]] && input=${value}
+
+echo "Se busca: ${input}"
+
+
+# Lista de ubicaciones en un arreglo llamado directories
+set -a directories
+directories[0]="/software/sgc/gcinte/entornos/aploclec"
+directories[1]="/software/sgc/gcinte/entornos/aplocimp"
+directories[2]="/software/sgc/gcinte/exec/batch/lib"
+# directories[3]="/software/sgc/gcinte/exec/batch/exec"
+directories[4]="/software/sgc/gcinte/exec/batch/scripts"
+# directories[5]="/software/sgc/gcinte/exec/batch/bin"
+directories[6]="/software/sgc/gcinte/fuentes/batch/bdg/src"
+directories[7]="/software/sgc/gcinte/fuentes/batch/calidad/src"
+directories[8]="/software/sgc/gcinte/fuentes/batch/cobros/src"
+directories[9]="/software/sgc/gcinte/fuentes/batch/depuradores/src"
+directories[10]="/software/sgc/gcinte/fuentes/batch/facturacion/src"
+directories[11]="/software/sgc/gcinte/fuentes/batch/informes/src"
+directories[12]="/software/sgc/gcinte/fuentes/batch/interfase/src"
+directories[13]="/software/sgc/gcinte/fuentes/batch/lecturas/src"
+directories[14]="/software/sgc/gcinte/fuentes/batch/recursos/src"
+directories[15]="/software/sgc/gcinte/fuentes/funcn/niv2/src"
+directories[16]="/software/sgc/gcinte/fuentes/funcn/niv3/src"
+directories[17]="/software/sgc/gcinte/fuentes/funcn/objco/src"
+directories[18]="/software/sgc/gcinte/exec/funcn/lib"
+# directories[19]="/software/sgc/gcinte/exec/funcn/bin"
+
+## Bucle for utilizando el arreglo directories
+for DIRECTORIO in "${directories[@]}"
 do
-
-	echo "******** BUSQUEDA EN DIRECTORIO " $DIRECTORIO
-	cd $DIRECTORIO
-	
-	echo "\n---------------- grep 'AP063001'  \n"
-	
-	grep -i 'AP063001' *
-	
-	
+  echo "*** Buscando en $DIRECTORIO ***"
+  cd "$DIRECTORIO"
+  grep -i "$value" *
 done
 
-echo "TERMINOBIEN" 
+echo "Ejecucion terminada."
+
+USRS
