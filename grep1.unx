@@ -1,0 +1,26 @@
+
+echo "***************************************************"
+echo "* 						*"
+echo "*  PROGRAMA GREP GLOBAL                    				*"
+echo "* 						*"
+echo "***************************************************"
+
+
+#BCOB='/software/sgc/gcinte/fuentes/batch/cobros/src'
+#*****************************************************
+#
+#*****************************************************
+for DIRECTORIO in `cat salida_aliases.tmp` 
+do
+
+	echo "******** BUSQUEDA EN DIRECTORIO " $DIRECTORIO
+	cd $DIRECTORIO
+	
+	echo "\n---------------- grep 'AP063001'  \n"
+	
+	grep -i 'AP063001' *
+	
+	
+done
+
+echo "TERMINOBIEN" 
